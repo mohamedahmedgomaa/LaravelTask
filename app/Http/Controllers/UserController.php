@@ -32,7 +32,8 @@ class UserController extends Controller
      */
     public function __construct(UserService $userService)
     {
-        $this->middleware('auth:api', ['except' => ['login', 'register', 'redirectUnauthorized']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'redirectUnauthorized'
+            ,'confirmedToken','updatePassword', 'sendEmailReset']]);
         $this->userService = $userService;
     }
 
