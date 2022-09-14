@@ -21,7 +21,7 @@ Route::resource('post', PostController::class);
 Route::controller(UserController::class)->group(function () {
     Route::post('login', 'login')->name('login');
     Route::post('register', 'register')->name('register');
-    Route::post('logout', 'logout');
+    Route::post('logout', 'logout')->name('logout');
     Route::get('redirect-unauthorized', 'redirectUnauthorized')->name('redirectUnauthorized');
 
     Route::post('password/reset-send-email', 'sendEmailReset')->name('sendEmailReset');
