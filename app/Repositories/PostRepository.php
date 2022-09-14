@@ -40,7 +40,7 @@ class PostRepository implements PostRepositoryInterface
      */
     public function getById($id)
     {
-        return $this->post->where('id', $id)->get();
+        return $this->post->where('id', $id)->first();
     }
 
     /**

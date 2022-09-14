@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Exception;
@@ -58,7 +59,7 @@ class UserService
         return [
             'status' => 200,
             'message' => 'success',
-            'data' => $result,
+            'data' => new UserResource($result),
         ];
     }
 

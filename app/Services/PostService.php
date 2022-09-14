@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Repositories\PostRepository;
 use Exception;
@@ -74,10 +75,12 @@ class PostService
      */
     public function getById($id)
     {
+        $data = $this->postRepository->getById($id);
+        ($data != null) ? $data = new PostResource($data) : $data = null;
         return [
             'status' => 200,
             'message' => 'success',
-            'data' => $this->postRepository->getById($id),
+            'data' => $data,
         ];
     }
 
@@ -107,6 +110,12 @@ class PostService
         try {
             $post = $this->postRepository->update($data, $id);
 
+            return [
+                'status' => 200,
+                'message' => 'success',
+                'data' => new PostResource($post),
+            ];
+
         } catch (Exception $e) {
             return [
                 'status' => 500,
@@ -114,12 +123,6 @@ class PostService
                 'data' => null
             ];
         }
-
-        return [
-            'status' => 200,
-            'message' => 'success',
-            'data' => $post,
-        ];
 
     }
 
@@ -151,7 +154,7 @@ class PostService
         return [
             'status' => 200,
             'message' => 'success',
-            'data' => $result,
+            'data' =>  new PostResource($result),
         ];
     }
 
